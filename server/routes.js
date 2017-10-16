@@ -9,6 +9,8 @@ module.exports = (function() {
     res.send('api works');
   });
 
+  require('./routes/currency')(router)
+  
   return router;    
 })();
 

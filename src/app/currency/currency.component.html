@@ -1,0 +1,131 @@
+<!-- <div class="row">
+  <div class="col-md-6">
+    <div style="display: block;">
+      <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6" style="margin-bottom: 10px">
+    <table class="table table-responsive table-condensed">
+      <tr>
+        <th *ngFor="let label of lineChartLabels">{{label}}</th>
+      </tr>
+      <tr *ngFor="let d of lineChartData">
+        <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+      </tr>
+    </table>
+    <button (click)="randomize()">CLICK</button>
+  </div>
+</div> -->
+
+
+<div class="card">
+  <h4 class="card-header">Currency</h4>
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
+            [legend]="lineChartLegend" [chartType]="lineChartType" ></canvas>
+        </div>
+        <div class="col">
+            <!-- <form>
+              <br><br>
+              <div class="row">
+                <div class="col">
+                  <input type="number" class="form-control" [(ngModel)]="currencyNumber" name="currencyNumber" (keyup)="convert(currency.value, coin.value)" >
+                </div>
+                <div class="col">
+                  <select id="inputState"  #currency class="form-control"> 
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                  <div class="col">
+                  
+                    <input type="number" class="form-control" [(ngModel)]="coinNumber" name="coinNumber" (keyup)="convert(currency.value, coin.value)" >
+                  </div>
+                  <div class="col">
+                    <select id="inputState" #coin class="form-control">
+                        <option value="BTC">BTC</option>
+                        <option value="ETH">ETH</option>
+                    </select>
+                  </div>
+                </div>
+            </form> -->
+
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col">
+          <div class="alert alert-dark" role="alert">
+            1 BTC   
+            <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+          </div>
+        </div>
+        <div class="col">
+          <div class="alert alert-dark" role="alert">
+            This is a dark alert with
+            <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row">
+
+        <div class="col">
+          <br>
+          <br>
+          <br> Bitcoin - BTC
+          <table class="table table-inverse">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>USD</th>
+                <th>EUR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of currency ">
+                <td>{{ row.TIME }}</td>
+                <td>{{ row.USD }}</td>
+                <td>{{ row.EUR }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <br>
+          <br>
+          <br> Etherium - ETH
+          <table class="table table-inverse">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>USD</th>
+                <th>EUR</th>
+                <th>BTC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of currency ">
+                <td>{{ row.TIME }}</td>
+                <td>{{ row.USD }}</td>
+                <td>{{ row.EUR }}</td>
+                <td>{{ row.BTC }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
