@@ -18,4 +18,9 @@ export class CurrencyService {
     return this.http.get('/api/BTC')
     .map(res => res.json())
   }
+
+  convert(currency, coin, currencyNumber, coinNumber){
+    return this.http.get('/api/conversion/'+ currency + '/' + coin )
+    .map(res => res.json())
+  }
 }

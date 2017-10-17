@@ -7,8 +7,37 @@ const API = 'https://jsonplaceholder.typicode.com';
 
 module.exports = function (router) {
 
+  router.get('/conversion/:currency/:coin', (req, res) => {
+    
+    let coin = req.params.coin
+    let currency = req.params.currency
+
+    var options = {
+      method: 'GET',
+      url: 'https://min-api.cryptocompare.com/data/price',
+      qs: {
+        fsym: coin,
+        tsyms: currency
+      }
+    };
+
+    request(options, function (error, response, body) {
+      if (error)
+        res.status(500).json({
+          Error: error
+        })
+
+
+      body = JSON.parse(body)
+      
+      res.status(200).json(body)
+
+    });
+
+
+  })
+
   router.get('/BTC', (req, res) => {
-    // var request = require("request");
 
     var options = {
       method: 'GET',
@@ -28,7 +57,6 @@ module.exports = function (router) {
       body = JSON.parse(body)
       res.status(200).json(body)
 
-      // console.log(body);
     });
   })
 

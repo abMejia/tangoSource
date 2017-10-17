@@ -13,7 +13,9 @@ export class CurrencyComponent implements OnInit {
   currency: any = [];
   posts: any = []
   table: any = []
-  dataBTC: Array<number>;
+  dataBTC: Array<number> = []; 
+  // dataBTC: any = [];
+  
   dataETH: Array<number>;
   // model: any = {}
   
@@ -25,9 +27,10 @@ export class CurrencyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    Observable.interval(10000).subscribe(x => {
-      this.getCurrency();
-    });
+    // Observable.interval(2000).subscribe(x => {
+    //   this.getCurrency();
+    //   this.reload()
+    // });
 
     // this.getBTC()
   }
@@ -38,32 +41,47 @@ export class CurrencyComponent implements OnInit {
       currency => {
         this.currency.push(currency)
         console.log(this.currency)
-        // this.dataBTC.push(currency.BTC)
+        this.dataBTC.push(currency.BTC)
+        // console.log(this.dataBTC)
         // this.dataETH.push(currency)
       })
     
-    // if(this.currency.length >= 5 ){
-    //   this.currency.splice(0,1)
-    // }
+    if(this.currency.length >= 5 ){
+      this.currency.splice(0,1)
+    }
     
   }
 
-  // getBTC(){
-  //   this.currencyService.getBTC().subscribe( btc => {
-  //     console.log(btc)
-  //   })
-  // }
+  getBTC(){
+    this.currencyService.getBTC().subscribe( btc => {
+      console.log(btc)
+    })
+  }
 
-  // convert(currency, coin){
-  // //  alert(currency + " = " + this.currencyNumber + " - " + coin + " = " + this.coinNumber) 
+  convert(currency, coin){
+    this.currencyService.convert(currency, coin, this.currencyNumber, this.coinNumber).subscribe(data => {
+     
+      // console.log(JSON.stringify(data))
+      console.log(data[0])
+      let result = this.currencyNumber / data.USD
+      this.coinNumber = result
+    })
+  }
 
-  // }
+  convertInverse(currency, coin){
+    this.currencyService.convert(currency, coin, this.currencyNumber, this.coinNumber).subscribe(data => {
+      let result = this.coinNumber * data.USD
+      this.currencyNumber = result
+    })
+  }
 
   // lineChart
   public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'BTC' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'ETH' },
-    // { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
+    // { data: [65, 59, 80, 81, 56, 55, 40], label: 'BTC' },
+    
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'BTC' },    
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'ETH' }
+    
   ];
 
   // public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -92,16 +110,19 @@ export class CurrencyComponent implements OnInit {
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
 
-  // public randomize(): void {
-  //   let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-  //   for (let i = 0; i < this.lineChartData.length; i++) {
-  //     _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-  //     for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-  //       _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-  //     }
-  //   }
-  //   this.lineChartData = _lineChartData;
-  // }
+  public reload(): void {
+
+    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
+    
+    // for (let i = 0; i < this.lineChartData.length; i++) {
+    //   _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
+    //   for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+    //     _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+    //   }
+    // }
+    
+    this.lineChartData = _lineChartData;
+  }
 
   // events
   // public chartClicked(e: any): void {

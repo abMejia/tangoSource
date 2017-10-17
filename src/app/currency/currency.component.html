@@ -30,14 +30,14 @@
             [legend]="lineChartLegend" [chartType]="lineChartType" ></canvas>
         </div>
         <div class="col">
-            <!-- <form>
+            <form>
               <br><br>
               <div class="row">
                 <div class="col">
-                  <input type="number" class="form-control" [(ngModel)]="currencyNumber" name="currencyNumber" (keyup)="convert(currency.value, coin.value)" >
+                  <input type="number" class="form-control" [(ngModel)]="currencyNumber" name="currencyNumber" (keyup)="convert(currencyBox.value, coinBox.value)" >
                 </div>
                 <div class="col">
-                  <select id="inputState"  #currency class="form-control"> 
+                  <select id="inputState"  #currencyBox class="form-control"> 
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                   </select>
@@ -46,17 +46,16 @@
               <br>
               <div class="row">
                   <div class="col">
-                  
-                    <input type="number" class="form-control" [(ngModel)]="coinNumber" name="coinNumber" (keyup)="convert(currency.value, coin.value)" >
+                    <input type="number" class="form-control" [(ngModel)]="coinNumber" name="coinNumber" (keyup)="convertInverse(currencyBox.value, coinBox.value)"  >
                   </div>
                   <div class="col">
-                    <select id="inputState" #coin class="form-control">
+                    <select id="inputState" #coinBox class="form-control">
                         <option value="BTC">BTC</option>
                         <option value="ETH">ETH</option>
                     </select>
                   </div>
                 </div>
-            </form> -->
+            </form> 
 
         </div>
       </div>
